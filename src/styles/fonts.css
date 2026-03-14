@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
+
+/* Recoleta Alt – uses font from the device if installed */
+@font-face {
+  font-family: 'Recoleta Alt';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: local('Recoleta Alt Bold'), local('RecoletaAlt-Bold'), local('Recoleta Alt');
+}
+
+/* Use this class for section titles so font-family matches @font-face */
+.font-recoleta {
+  font-family: 'Recoleta Alt', sans-serif;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: local('Google Sans Medium');
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: local('Google Sans Bold');
+}
