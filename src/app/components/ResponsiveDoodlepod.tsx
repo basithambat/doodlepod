@@ -5,6 +5,9 @@ import svgPathsProduct from "../../imports/svg-ittlgyf0qm";
 import svgPathsFAQ from "../../imports/svg-34rvizvibr";
 import svgPathsFooter from "../../imports/svg-shohyi183g";
 import svgPathsProductSection from "../../imports/svg-s2ox6xv3le";
+import { heroPillTextPathD } from "./heroPillTextPath";
+import { ScrollReveal } from "./ScrollReveal";
+import { motion } from "motion/react";
 // Image assets (from repo: public/images/ — synced from src/assets)
 const imgImage22 = "/images/hero-device.png";
 const imgImage23 = "/images/product.png";
@@ -112,7 +115,7 @@ export default function ResponsiveDoodlepod() {
                       <g mask="url(#mask0_hero_pill_155)">
                         <path d="M25.2961 7.45408C25.3485 10.4536 25.4008 13.4532 25.4532 16.4527C44.4962 16.0734 63.5392 15.6942 82.5822 15.3149C228.84 12.4019 375.098 9.48883 521.356 6.57582C532.381 6.07732 542.575 15.842 542.528 26.9301C543.029 38.0037 533.221 48.2434 522.083 48.1964C356.782 51.4887 191.481 54.781 26.1797 58.0733C20.5534 58.2118 14.933 56.0899 10.788 52.2724C6.34479 48.241 3.66615 42.3525 3.57719 36.3375C3.04724 24.5138 13.5157 13.5904 25.4041 13.6407C25.3845 12.5158 25.3648 11.391 25.3452 10.2662C11.6589 10.141 -0.520687 22.6704 0.017168 36.3997C0.0831618 43.3652 3.16747 50.253 8.31306 54.9636C13.1083 59.4289 19.6799 61.9503 26.2451 61.8189C191.56 59.3403 356.876 56.8616 522.191 54.383C536.628 54.5114 549.468 41.2983 548.9 26.8189C549.029 12.3324 535.771 -0.551122 521.242 0.018183C374.971 2.21127 228.701 4.40436 82.43 6.59745C63.3854 6.88299 44.3408 7.16853 25.2961 7.45408ZM25.4532 16.4527L25.2961 7.45408L25.3452 10.2662L25.4041 13.6407L25.4532 16.4527Z" fill="black"/>
                       </g>
-                      <path d="M41.9492 46.8265L33.9854 25.4822L38.3648 25.4058L43.0303 38.2863L43.8578 41.0023L44.0978 40.9981L44.89 38.2539L49.2831 25.2152L53.6624 25.1388L46.2085 46.7522L41.9492 46.8265ZM61.9038 46.9583C60.304 46.9862 58.8781 46.661 57.6261 45.9828C56.3937 45.2842 55.417 44.3311 54.6958 43.1235C53.9942 41.8955 53.63 40.5117 53.6031 38.9719C53.5763 37.4322 53.8921 36.0464 54.5507 34.8147C55.229 33.5627 56.1719 32.5761 57.3795 31.8549C58.6068 31.1134 60.0203 30.7287 61.62 30.7007C63.2198 30.6728 64.6358 31.0082 65.8682 31.7068C67.1006 32.4054 68.0674 33.3586 68.7686 34.5666C69.4898 35.7742 69.8638 37.1479 69.8907 38.6876C69.9175 40.2274 69.5919 41.6233 68.9136 42.8753C68.255 44.107 67.3221 45.0934 66.1148 45.8346C64.9072 46.5558 63.5035 46.9303 61.9038 46.9583ZM61.8399 43.2988C62.5998 43.2856 63.2867 43.1035 63.9007 42.7528C64.5343 42.3817 65.0353 41.8628 65.4038 41.1963C65.7918 40.5094 65.9777 39.6961 65.9613 38.7562C65.9449 37.8164 65.7309 37.02 65.3195 36.367C64.928 35.7138 64.4092 35.2128 63.763 34.864C63.1368 34.5149 62.4438 34.3469 61.6839 34.3602C60.944 34.3731 60.2473 34.5653 59.5936 34.9368C58.96 35.3079 58.449 35.8269 58.0606 36.4937C57.6922 37.1603 57.5161 37.9635 57.5325 38.9033C57.549 39.8432 57.7531 40.6497 58.1449 41.323C58.5563 41.9759 59.0851 42.4768 59.7313 42.8256C60.3972 43.154 61.1 43.3117 61.8399 43.2988ZM72.9722 46.285L72.7051 30.9873L76.6345 30.9187L76.9016 46.2164L72.9722 46.285ZM74.6555 29.273C73.9556 29.2852 73.3514 29.0458 72.8427 28.5546C72.3341 28.0634 72.0736 27.4678 72.0614 26.7679C72.0492 26.068 72.2889 25.4738 72.7804 24.9851C73.2716 24.4764 73.8671 24.216 74.567 24.2038C75.2669 24.1916 75.8612 24.4312 76.3499 24.9228C76.8582 25.394 77.1184 25.9795 77.1306 26.6794C77.1428 27.3793 76.9034 27.9836 76.4122 28.4923C75.941 29.0006 75.3554 29.2608 74.6555 29.273ZM87.8833 46.5048C86.3236 46.532 84.9279 46.2163 83.6962 45.5577C82.4841 44.8788 81.5175 43.9355 80.7964 42.7279C80.0948 41.5 79.7303 40.0961 79.7027 38.5163C79.6751 36.9366 79.9906 35.5309 80.6492 34.2992C81.3278 33.0672 82.2609 32.0907 83.4485 31.3699C84.6561 30.6487 86.0398 30.2745 87.5996 30.2473C89.2993 30.2176 90.7654 30.5521 91.9978 31.2507C93.2301 31.9493 94.1282 32.9737 94.6918 34.3241L91.1185 35.8867C90.7864 35.1924 90.3275 34.6903 89.742 34.3805C89.1562 34.0507 88.4633 33.8928 87.6634 33.9067C86.8836 33.9203 86.187 34.1225 85.5737 34.5133C84.9601 34.884 84.4791 35.4025 84.1306 36.0687C83.7822 36.7349 83.616 37.5279 83.6321 38.4478C83.6481 39.3676 83.8421 40.1644 84.2139 40.838C84.5854 41.4916 85.0844 42.003 85.7109 42.3721C86.3371 42.7212 87.0401 42.889 87.82 42.8753C88.6999 42.86 89.4264 42.6573 89.9997 42.2672C90.5726 41.8572 91.0332 41.309 91.3812 40.6229L94.9179 42.1214C94.3404 43.4116 93.4485 44.4574 92.2423 45.2585C91.0361 46.0597 89.5831 46.4751 87.8833 46.5048Z" fill="black"/>
+                      <path d={heroPillTextPathD} fill="black"/>
                     </g>
                     <defs>
                       <clipPath id="clip0_hero_pill_155">
@@ -126,7 +129,7 @@ export default function ResponsiveDoodlepod() {
 
             {/* Hero Content */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center w-full">
-              <div className="flex flex-col gap-6 md:gap-10 items-start w-full lg:flex-1">
+              <ScrollReveal className="flex flex-col gap-6 md:gap-10 items-start w-full lg:flex-1" variant="text">
                 <div className="flex flex-col gap-2 text-black w-full">
                   <h2 className="font-recoleta text-4xl md:text-7xl lg:text-[116px] leading-tight lg:leading-[116px]">
                     Say it, Make it
@@ -137,13 +140,13 @@ export default function ResponsiveDoodlepod() {
                 </div>
                 <button className="bg-[#e4002b] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] transition-all">
                   <p className="font-['Google_Sans:Bold',sans-serif] font-bold text-lg md:text-xl lg:text-[28px] text-[#f6eedf] whitespace-nowrap" style={{ fontVariationSettings: "'GRAD' 0" }}>
-                    Get doodlepod
+                    Get Doodlepod
                   </p>
                 </button>
-              </div>
+              </ScrollReveal>
               
               {/* Image Container - hero image (10% larger) */}
-              <div className="w-full lg:flex-1 flex justify-center min-w-0 overflow-visible">
+              <ScrollReveal className="w-full lg:flex-1 flex justify-center min-w-0 overflow-visible" variant="image">
                 <img
                   alt="Kid with Doodlepod device—voice-powered creativity for kids"
                   className="w-full max-w-md lg:max-w-full object-contain scale-110 origin-center"
@@ -151,7 +154,7 @@ export default function ResponsiveDoodlepod() {
                   fetchPriority="high"
                   decoding="async"
                 />
-              </div>
+              </ScrollReveal>
             </div>
           </div>
 
@@ -176,14 +179,14 @@ export default function ResponsiveDoodlepod() {
       {/* Big Little Ideas Section */}
       <section className="bg-[#015446] w-full min-w-0 overflow-hidden">
         <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 items-center px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[269px] py-12 md:py-16 lg:py-24 max-w-full">
-          <div className="flex flex-col gap-2 items-center text-center">
+          <ScrollReveal className="flex flex-col gap-2 items-center text-center" variant="text">
             <h2 className="font-recoleta text-3xl md:text-6xl lg:text-[88px] text-[#f3f3f3]">
               big little ideas,<br />made real
             </h2>
             <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-lg md:text-2xl lg:text-[28px] text-[#f6eedf] text-center max-w-4xl" style={{ fontVariationSettings: "'GRAD' 0" }}>
               A simple little ritual that turns imagination into something kids can hold, keep, and proudly show off.
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 w-full max-w-5xl">
@@ -192,7 +195,7 @@ export default function ResponsiveDoodlepod() {
               { bg: '#FFE302', text: "Your idea becomes a sticker right away, ready to print in Doodlepod's signature style.", img: imgImage15, alt: 'Doodlepod device printing your idea—Watch it become a sticker', rotate: true },
               { bg: '#FE902F', text: 'Peel it, color it, label with it, trade it, or turn it into part of a bigger craft project.', img: imgImage16, alt: 'Peel, color, and play—craft with your stickers', rotate: false }
             ].map((card, idx) => (
-              <div key={idx} className="relative w-full h-[320px] md:h-[374px] min-w-0">
+              <ScrollReveal key={idx} variant="image" delay={idx * 0.1} className="relative w-full h-[320px] md:h-[374px] min-w-0 [transform:perspective(800px)_rotateX(0)] [transform-style:preserve-3d] transition-[transform] duration-300 ease-out hover:[transform:perspective(800px)_rotateX(-8deg)]">
                 {/* SVG Background */}
                 <div className={`absolute inset-0 ${card.rotate ? 'flex items-center justify-center' : ''}`}>
                   <div className={card.rotate ? '-scale-y-100 rotate-180 w-full h-full' : 'w-full h-full'}>
@@ -211,13 +214,13 @@ export default function ResponsiveDoodlepod() {
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col p-6 md:p-8">
                   <div className="h-48 md:h-52 mb-4 flex items-center justify-center min-w-0">
-                    <img alt={card.alt} className="max-h-full w-auto object-contain max-w-full" src={card.img} decoding="async" />
+                    <img alt={card.alt} className="max-h-full w-auto object-contain max-w-full" src={card.img} loading="lazy" decoding="async" />
                   </div>
                   <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-base md:text-lg text-[#1e1b1a]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                     {card.text}
                   </p>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -228,7 +231,7 @@ export default function ResponsiveDoodlepod() {
         <div className="flex min-w-0 flex-col lg:flex-row gap-8 lg:gap-16 items-start px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[269px] py-12 md:py-16 lg:py-24 max-w-full">
           {/* For Parents — min-w-0 + overflow-hidden so column can shrink and never overlap */}
           <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1 lg:min-w-0 lg:overflow-x-auto lg:basis-0">
-            <div className="flex flex-col gap-4 md:gap-6 text-[#131415] min-w-0">
+            <ScrollReveal className="flex flex-col gap-4 md:gap-6 text-[#131415] min-w-0" variant="text">
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px] text-[#0256da]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 for parents
               </p>
@@ -238,9 +241,19 @@ export default function ResponsiveDoodlepod() {
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-lg md:text-2xl lg:text-[28px]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 Doodlepod turns voice-powered play into a tactile, joyful activity with a cleaner setup, thoughtful controls, and a calmer creative experience.
               </p>
-            </div>
-            {/* Pills: vertical stack per Figma (node 9-490) — blue fill, 7px black border, staggered widths */}
-            <div className="flex flex-col gap-4 items-start w-full min-w-0">
+            </ScrollReveal>
+            {/* Pills: piano-style staggered animation + key-press hover */}
+            <motion.div
+              className="flex flex-col gap-4 items-start w-full min-w-0"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                visible: {
+                  transition: { staggerChildren: 0.06, delayChildren: 0.02 },
+                },
+              }}
+            >
               {[
                 'Thoughtfully moderated creative experience',
                 'Thermal printing with no ink and less mess',
@@ -248,9 +261,19 @@ export default function ResponsiveDoodlepod() {
                 'Simple setup and easy repeat use',
                 'Privacy-first design for voice experiences'
               ].map((text, idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className="bg-[#0256da] border-black border-solid flex items-center justify-start px-4 py-2.5 shrink-0 w-full max-w-full rounded-xl border-t-[3px] border-r-[6px] border-b-[7px] border-l-[4px]"
+                  className="bg-[#0256da] border-black border-solid flex items-center justify-start px-4 py-2.5 shrink-0 w-full max-w-full rounded-xl border-t-[3px] border-r-[6px] border-b-[7px] border-l-[4px] cursor-default"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  whileHover={{
+                    scale: 0.98,
+                    transition: { duration: 0.08 },
+                  }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <p
                     className="font-['Google_Sans:Bold',sans-serif] font-bold text-base md:text-xl lg:text-[24px] leading-snug text-[#e9e7e0] text-left"
@@ -258,14 +281,14 @@ export default function ResponsiveDoodlepod() {
                   >
                     {text}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* For Kids — same flex constraints so columns share space and never overlap */}
           <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1 lg:min-w-0 lg:overflow-x-auto lg:basis-0">
-            <div className="flex flex-col gap-4 md:gap-6 text-[#131415] min-w-0">
+            <ScrollReveal className="flex flex-col gap-4 md:gap-6 text-[#131415] min-w-0" variant="text" delay={0.1}>
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px] text-[#c65772]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 For kids
               </p>
@@ -275,10 +298,10 @@ export default function ResponsiveDoodlepod() {
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-lg md:text-2xl lg:text-[28px]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 Kids don't just get stickers. They get a tiny creation station for animals, names, rewards, party fun, story worlds, and all kinds of silly original ideas.
               </p>
-            </div>
-            <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-8 items-center min-w-0">
+            </ScrollReveal>
+            <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-8 items-center min-w-0 overflow-visible">
               {kidsPills.map((pill, idx) => (
-                <div key={idx} className="relative inline-flex h-12 md:h-14 overflow-hidden flex-shrink-0 min-w-0 max-w-full">
+                <div key={idx} className="relative inline-flex h-12 md:h-14 flex-shrink-0 min-w-0 max-w-full transition-transform duration-200 ease-out hover:scale-105 hover:rotate-1 cursor-pointer overflow-visible">
                   <svg className="absolute inset-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox={`0 0 ${pill.width} 56`}>
                     <path d={pill.path} fill="#FF9EB5" />
                     <g>
@@ -306,7 +329,7 @@ export default function ResponsiveDoodlepod() {
       {/* Ways to Play Section */}
       <section className="bg-[#037f59] w-full min-w-0 overflow-hidden">
         <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 items-center px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[269px] py-12 md:py-16 lg:py-24 max-w-full">
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start w-full text-[#f6eedf]">
+          <ScrollReveal className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start w-full text-[#f6eedf]" variant="text">
             <div className="flex flex-col gap-4 w-full lg:flex-[2]">
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 Ways to play
@@ -318,13 +341,13 @@ export default function ResponsiveDoodlepod() {
             <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-lg md:text-2xl lg:text-[28px] w-full lg:flex-1" style={{ fontVariationSettings: "'GRAD' 0" }}>
               Show parents this is not a one-time novelty purchase. Show kids it can become part of everyday creative life.
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Play Cards */}
           <div className="flex flex-col gap-6 md:gap-8 w-full max-w-full items-center min-w-0">
             {/* First Row - Rotated Left */}
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:-rotate-2 w-full max-w-full justify-center">
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0">
+              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:-rotate-1 hover:scale-[1.02] hover:shadow-lg">
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Everyday creativity
                 </h4>
@@ -332,7 +355,7 @@ export default function ResponsiveDoodlepod() {
                   Make dragons, donuts, space cats, silly monsters, and original characters on demand.
                 </p>
               </div>
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0">
+              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:rotate-1 hover:scale-[1.02] hover:shadow-lg">
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   School and learning
                 </h4>
@@ -344,7 +367,7 @@ export default function ResponsiveDoodlepod() {
 
             {/* Second Row - Rotated Right */}
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:rotate-1 w-full max-w-full justify-center">
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0">
+              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:-rotate-1 hover:scale-[1.02] hover:shadow-lg">
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Parties and gifting
                 </h4>
@@ -352,7 +375,7 @@ export default function ResponsiveDoodlepod() {
                   Print custom stickers for birthday favors, games, cards, and party tables.
                 </p>
               </div>
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0">
+              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:rotate-1 hover:scale-[1.02] hover:shadow-lg">
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Family time
                 </h4>
@@ -376,7 +399,7 @@ export default function ResponsiveDoodlepod() {
 
         <div className="flex min-w-0 flex-col lg:flex-row gap-8 lg:gap-16 items-center px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[269px] py-8 md:py-12 lg:py-16 max-w-full">
           {/* Product Info */}
-          <div className="flex flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1">
+          <ScrollReveal className="flex flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1" variant="text">
             <div className="flex flex-col gap-4 md:gap-6 text-[#f6eedf]">
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 Starter set
@@ -420,14 +443,14 @@ export default function ResponsiveDoodlepod() {
                 </p>
               </button>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Product Image */}
-          <div className="w-full lg:flex-1 flex justify-center items-center">
-            <div className="relative w-full max-w-sm md:max-w-md lg:max-w-[544px]">
-              <img alt="Doodlepod device with dog stickers" className="w-full h-auto object-cover" src={imgImage23} />
+          <ScrollReveal className="w-full lg:flex-1 flex justify-center items-center" variant="image" delay={0.1}>
+            <div className="relative w-full max-w-sm md:max-w-md lg:max-w-[544px] transition-transform duration-300 ease-out hover:scale-105 hover:rotate-2">
+              <img alt="Doodlepod device with dog stickers" className="w-full h-auto object-cover" src={imgImage23} loading="lazy" decoding="async" />
             </div>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Wave decoration - bottom - edge to edge */}
@@ -441,7 +464,7 @@ export default function ResponsiveDoodlepod() {
       {/* FAQ Section */}
       <section className="bg-[#f6eedf] w-full min-w-0 overflow-hidden">
         <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 items-center px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[269px] py-12 md:py-16 lg:py-24 max-w-full">
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start w-full text-[#131415]">
+          <ScrollReveal className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start w-full text-[#131415]" variant="text">
             <div className="flex flex-col gap-4 w-full lg:flex-[2]">
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 FAQ
@@ -453,7 +476,7 @@ export default function ResponsiveDoodlepod() {
             <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-lg md:text-2xl lg:text-[28px] w-full lg:flex-1" style={{ fontVariationSettings: "'GRAD' 0" }}>
               Show parents this is not a one-time novelty purchase. Show kids it can become part of everyday creative life.
             </p>
-          </div>
+          </ScrollReveal>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start w-full">
             <div className="flex flex-col gap-2 w-full lg:flex-[2]">
@@ -532,7 +555,7 @@ export default function ResponsiveDoodlepod() {
             </div>
             <div className="w-full lg:flex-1 flex justify-center lg:justify-end relative">
               <div className="-scale-y-100 rotate-180 lg:absolute lg:left-[-120px] lg:top-[-40px]">
-                <img alt="Kid with magnifying glass" className="w-full max-w-md lg:max-w-[680px] object-contain" src={imgImage19} />
+                <img alt="Kid with magnifying glass" className="w-full max-w-md lg:max-w-[680px] object-contain" src={imgImage19} loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -615,10 +638,10 @@ export default function ResponsiveDoodlepod() {
               </div>
               <div className="flex gap-8 items-center">
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-[#037f59] rounded-full p-4 flex items-center justify-center w-[91px] h-[91px] hover:scale-110 transition-transform cursor-pointer">
-                  <img alt="Instagram" className="w-[59px] h-[59px] object-cover" src={imgImage17} />
+                  <img alt="Instagram" className="w-[59px] h-[59px] object-cover" src={imgImage17} loading="lazy" decoding="async" />
                 </a>
                 <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="bg-[#037f59] rounded-full p-4 flex items-center justify-center w-[91px] h-[91px] hover:scale-110 transition-transform cursor-pointer">
-                  <img alt="YouTube" className="w-[59px] h-[59px] object-cover" src={imgImage18} />
+                  <img alt="YouTube" className="w-[59px] h-[59px] object-cover" src={imgImage18} loading="lazy" decoding="async" />
                 </a>
               </div>
             </div>
