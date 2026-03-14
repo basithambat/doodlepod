@@ -7,6 +7,7 @@ import svgPathsFooter from "../../imports/svg-shohyi183g";
 import svgPathsProductSection from "../../imports/svg-s2ox6xv3le";
 import { heroPillTextPathD } from "./heroPillTextPath";
 import { ScrollReveal } from "./ScrollReveal";
+import { playPianoKey, playKidsPillKey, playButtonHover, playCardDrum, playBigLittleIdeasCard } from "../utils/pianoSound";
 import { motion } from "motion/react";
 // Image assets (from repo: public/images/ — synced from src/assets)
 const imgImage22 = "/images/hero-device.png";
@@ -138,7 +139,12 @@ export default function ResponsiveDoodlepod() {
                     Kids speak an idea and Doodlepod turns it into a sticker they can print, color, peel, and make their own.
                   </p>
                 </div>
-                <button className="bg-[#e4002b] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] transition-all">
+                <button
+                  type="button"
+                  className="bg-[#e4002b] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] transition-all"
+                  onMouseEnter={playButtonHover}
+                  onClick={playButtonHover}
+                >
                   <p className="font-['Google_Sans:Bold',sans-serif] font-bold text-lg md:text-xl lg:text-[28px] text-[#f6eedf] whitespace-nowrap" style={{ fontVariationSettings: "'GRAD' 0" }}>
                     Get Doodlepod
                   </p>
@@ -188,37 +194,53 @@ export default function ResponsiveDoodlepod() {
             </p>
           </ScrollReveal>
 
-          {/* Feature Cards */}
+          {/* Feature Cards — vertical tilt on inner wrapper so Motion doesn't override; distinct sound per card */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 w-full max-w-5xl">
             {[
               { bg: '#FE9FB3', text: 'Press once and say anything from a pirate cat to your name in bubble letters.', img: imgImage14, alt: 'Pirate cat saying Speak—voice-powered creativity', rotate: false },
               { bg: '#FFE302', text: "Your idea becomes a sticker right away, ready to print in Doodlepod's signature style.", img: imgImage15, alt: 'Doodlepod device printing your idea—Watch it become a sticker', rotate: true },
               { bg: '#FE902F', text: 'Peel it, color it, label with it, trade it, or turn it into part of a bigger craft project.', img: imgImage16, alt: 'Peel, color, and play—craft with your stickers', rotate: false }
             ].map((card, idx) => (
-              <ScrollReveal key={idx} variant="image" delay={idx * 0.1} className="relative w-full h-[320px] md:h-[374px] min-w-0 [transform:perspective(800px)_rotateX(0)] [transform-style:preserve-3d] transition-[transform] duration-300 ease-out hover:[transform:perspective(800px)_rotateX(-8deg)]">
-                {/* SVG Background */}
-                <div className={`absolute inset-0 ${card.rotate ? 'flex items-center justify-center' : ''}`}>
-                  <div className={card.rotate ? '-scale-y-100 rotate-180 w-full h-full' : 'w-full h-full'}>
-                    <svg className="w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 281 373.441">
-                      <g>
-                        <mask fill="white" id={`mask_section2_${idx}`}>
-                          <path d={svgPathsSection2.pd318280} />
-                        </mask>
-                        <path d={svgPathsSection2.pd318280} fill={card.bg} />
-                        <path d={svgPathsSection2.p33caa680} fill="white" mask={`url(#mask_section2_${idx})`} />
-                      </g>
-                    </svg>
+              <ScrollReveal key={idx} variant="image" delay={idx * 0.1} className="relative w-full h-[320px] md:h-[374px] min-w-0">
+                <div
+                  className="relative w-full h-full cursor-pointer"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transform: 'perspective(800px) rotateX(0deg)',
+                    transition: 'transform 0.3s ease-out',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'perspective(800px) rotateX(-8deg)';
+                    playBigLittleIdeasCard(idx);
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(800px) rotateX(0deg)';
+                  }}
+                  onClick={() => playBigLittleIdeasCard(idx)}
+                >
+                  {/* SVG Background */}
+                  <div className={`absolute inset-0 ${card.rotate ? 'flex items-center justify-center' : ''}`}>
+                    <div className={card.rotate ? '-scale-y-100 rotate-180 w-full h-full' : 'w-full h-full'}>
+                      <svg className="w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 281 373.441">
+                        <g>
+                          <mask fill="white" id={`mask_section2_${idx}`}>
+                            <path d={svgPathsSection2.pd318280} />
+                          </mask>
+                          <path d={svgPathsSection2.pd318280} fill={card.bg} />
+                          <path d={svgPathsSection2.p33caa680} fill="white" mask={`url(#mask_section2_${idx})`} />
+                        </g>
+                      </svg>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col p-6 md:p-8">
-                  <div className="h-48 md:h-52 mb-4 flex items-center justify-center min-w-0">
-                    <img alt={card.alt} className="max-h-full w-auto object-contain max-w-full" src={card.img} loading="lazy" decoding="async" />
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col p-6 md:p-8">
+                    <div className="h-48 md:h-52 mb-4 flex items-center justify-center min-w-0">
+                      <img alt={card.alt} className="max-h-full w-auto object-contain max-w-full" src={card.img} loading="lazy" decoding="async" />
+                    </div>
+                    <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-base md:text-lg text-[#1e1b1a]" style={{ fontVariationSettings: "'GRAD' 0" }}>
+                      {card.text}
+                    </p>
                   </div>
-                  <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-base md:text-lg text-[#1e1b1a]" style={{ fontVariationSettings: "'GRAD' 0" }}>
-                    {card.text}
-                  </p>
                 </div>
               </ScrollReveal>
             ))}
@@ -226,11 +248,11 @@ export default function ResponsiveDoodlepod() {
         </div>
       </section>
 
-      {/* For Parents/Kids Section */}
-      <section className="bg-[#f5e88c] w-full min-w-0 overflow-hidden">
+      {/* For Parents/Kids Section — overflow-x-hidden only so hover scale/rotate on pills isn't clipped */}
+      <section className="bg-[#f5e88c] w-full min-w-0 overflow-x-hidden">
         <div className="flex min-w-0 flex-col lg:flex-row gap-8 lg:gap-16 items-start px-4 sm:px-6 md:px-12 lg:px-16 xl:px-[269px] py-12 md:py-16 lg:py-24 max-w-full">
-          {/* For Parents — min-w-0 + overflow-hidden so column can shrink and never overlap */}
-          <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1 lg:min-w-0 lg:overflow-x-auto lg:basis-0">
+          {/* For Parents — min-w-0 so column can shrink; no overflow-x-auto to avoid clipping pills */}
+          <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1 lg:min-w-0 lg:basis-0">
             <ScrollReveal className="flex flex-col gap-4 md:gap-6 text-[#131415] min-w-0" variant="text">
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px] text-[#0256da]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 for parents
@@ -263,7 +285,7 @@ export default function ResponsiveDoodlepod() {
               ].map((text, idx) => (
                 <motion.div
                   key={idx}
-                  className="bg-[#0256da] border-black border-solid flex items-center justify-start px-4 py-2.5 shrink-0 w-full max-w-full rounded-xl border-t-[3px] border-r-[6px] border-b-[7px] border-l-[4px] cursor-default"
+                  className="bg-[#0256da] border-black border-solid flex items-center justify-start px-4 py-2.5 shrink-0 w-full max-w-full rounded-xl border-t-[3px] border-r-[6px] border-b-[7px] border-l-[4px] cursor-pointer"
                   variants={{
                     hidden: { opacity: 0, y: 12 },
                     visible: { opacity: 1, y: 0 },
@@ -274,6 +296,8 @@ export default function ResponsiveDoodlepod() {
                     transition: { duration: 0.08 },
                   }}
                   whileTap={{ scale: 0.97 }}
+                  onHoverStart={() => playPianoKey(idx)}
+                  onTapStart={() => playPianoKey(idx)}
                 >
                   <p
                     className="font-['Google_Sans:Bold',sans-serif] font-bold text-base md:text-xl lg:text-[24px] leading-snug text-[#e9e7e0] text-left"
@@ -286,8 +310,8 @@ export default function ResponsiveDoodlepod() {
             </motion.div>
           </div>
 
-          {/* For Kids — same flex constraints so columns share space and never overlap */}
-          <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1 lg:min-w-0 lg:overflow-x-auto lg:basis-0">
+          {/* For Kids — same flex constraints; no overflow-x-auto so pills aren't clipped on hover */}
+          <div className="flex min-w-0 flex-col gap-8 md:gap-12 lg:gap-16 w-full lg:flex-1 lg:min-w-0 lg:basis-0">
             <ScrollReveal className="flex flex-col gap-4 md:gap-6 text-[#131415] min-w-0" variant="text" delay={0.1}>
               <p className="font-['Google_Sans:Medium',sans-serif] font-medium text-xl md:text-2xl lg:text-[28px] text-[#c65772]" style={{ fontVariationSettings: "'GRAD' 0" }}>
                 For kids
@@ -301,7 +325,15 @@ export default function ResponsiveDoodlepod() {
             </ScrollReveal>
             <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-8 items-center min-w-0 overflow-visible">
               {kidsPills.map((pill, idx) => (
-                <div key={idx} className="relative inline-flex h-12 md:h-14 flex-shrink-0 min-w-0 max-w-full transition-transform duration-200 ease-out hover:scale-105 hover:rotate-1 cursor-pointer overflow-visible">
+                <div
+                  key={idx}
+                  role="button"
+                  tabIndex={0}
+                  className="relative inline-flex h-12 md:h-14 flex-shrink-0 min-w-0 max-w-full transition-transform duration-200 ease-out hover:scale-105 hover:rotate-1 cursor-pointer overflow-visible"
+                  onMouseEnter={() => playKidsPillKey(idx)}
+                  onClick={() => playKidsPillKey(idx)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playKidsPillKey(idx); } }}
+                >
                   <svg className="absolute inset-0 w-full h-full" fill="none" preserveAspectRatio="none" viewBox={`0 0 ${pill.width} 56`}>
                     <path d={pill.path} fill="#FF9EB5" />
                     <g>
@@ -347,7 +379,14 @@ export default function ResponsiveDoodlepod() {
           <div className="flex flex-col gap-6 md:gap-8 w-full max-w-full items-center min-w-0">
             {/* First Row - Rotated Left */}
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:-rotate-2 w-full max-w-full justify-center">
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:-rotate-1 hover:scale-[1.02] hover:shadow-lg">
+              <div
+                role="button"
+                tabIndex={0}
+                className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:-rotate-1 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
+                onMouseEnter={() => playCardDrum(0)}
+                onClick={() => playCardDrum(0)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playCardDrum(0); } }}
+              >
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Everyday creativity
                 </h4>
@@ -355,7 +394,14 @@ export default function ResponsiveDoodlepod() {
                   Make dragons, donuts, space cats, silly monsters, and original characters on demand.
                 </p>
               </div>
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:rotate-1 hover:scale-[1.02] hover:shadow-lg">
+              <div
+                role="button"
+                tabIndex={0}
+                className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:rotate-1 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
+                onMouseEnter={() => playCardDrum(1)}
+                onClick={() => playCardDrum(1)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playCardDrum(1); } }}
+              >
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   School and learning
                 </h4>
@@ -367,7 +413,14 @@ export default function ResponsiveDoodlepod() {
 
             {/* Second Row - Rotated Right */}
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:rotate-1 w-full max-w-full justify-center">
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:-rotate-1 hover:scale-[1.02] hover:shadow-lg">
+              <div
+                role="button"
+                tabIndex={0}
+                className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:-rotate-1 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
+                onMouseEnter={() => playCardDrum(2)}
+                onClick={() => playCardDrum(2)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playCardDrum(2); } }}
+              >
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Parties and gifting
                 </h4>
@@ -375,7 +428,14 @@ export default function ResponsiveDoodlepod() {
                   Print custom stickers for birthday favors, games, cards, and party tables.
                 </p>
               </div>
-              <div className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:rotate-1 hover:scale-[1.02] hover:shadow-lg">
+              <div
+                role="button"
+                tabIndex={0}
+                className="bg-[#f6eedf] rounded-[24px] border-6 border-white p-6 md:p-8 w-full md:max-w-[280px] min-w-0 transition-all duration-200 ease-out hover:rotate-1 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
+                onMouseEnter={() => playCardDrum(3)}
+                onClick={() => playCardDrum(3)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playCardDrum(3); } }}
+              >
                 <h4 className="font-recoleta font-bold text-2xl md:text-[32px] text-black mb-2" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Family time
                 </h4>
@@ -437,7 +497,12 @@ export default function ResponsiveDoodlepod() {
                   ₹6,500
                 </p>
               </div>
-              <button className="bg-[#f6eedf] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] hover:scale-105 transition-all w-full max-w-[315px] -rotate-1">
+              <button
+                type="button"
+                className="bg-[#f6eedf] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] hover:scale-105 transition-all w-full max-w-[315px] -rotate-1"
+                onMouseEnter={playButtonHover}
+                onClick={playButtonHover}
+              >
                 <p className="font-['Google_Sans:Bold',sans-serif] font-bold text-lg md:text-xl lg:text-[28px] text-[#231f20] whitespace-nowrap" style={{ fontVariationSettings: "'GRAD' 0" }}>
                   Get the starter set
                 </p>
@@ -629,7 +694,12 @@ export default function ResponsiveDoodlepod() {
                   />
                 </div>
                 <div className="flex justify-end pb-4">
-                  <button className="bg-[#e4002b] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] hover:scale-105 transition-all">
+                  <button
+                    type="button"
+                    className="bg-[#e4002b] px-6 md:px-8 py-3 md:py-4 rounded-xl shadow-[4px_4px_0px_0px_#231f20] md:shadow-[6px_6px_0px_0px_#231f20] hover:shadow-[2px_2px_0px_0px_#231f20] hover:scale-105 transition-all"
+                    onMouseEnter={playButtonHover}
+                    onClick={playButtonHover}
+                  >
                     <p className="font-['Google_Sans:Bold',sans-serif] font-bold text-lg md:text-xl lg:text-[28px] text-[#f6eedf] whitespace-nowrap" style={{ fontVariationSettings: "'GRAD' 0" }}>
                       Subscribe
                     </p>
